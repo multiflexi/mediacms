@@ -3,7 +3,6 @@
 
 import hashlib
 import json
-import math
 import os
 import random
 import shutil
@@ -375,10 +374,15 @@ def media_file_info(input_file):
         video_frame_rate_n =  video_frame_rate[0]
         video_frame_rate_d =  video_frame_rate[2]  
 
+    if "r_frame_rate" in video_info.keys():
+        video_frame_rate = video_info["r_frame_rate"].partition("/")
+        video_frame_rate_n = video_frame_rate[0]
+        video_frame_rate_d = video_frame_rate[2]
+
     ret = {
         "filename": input_file,
         "file_size": file_size,
-        "video_duration": video_duration, 
+        "video_duration": video_duration,
         "video_frame_rate_n": video_frame_rate_n,
         "video_frame_rate_d": video_frame_rate_d,
         "video_bitrate": video_bitrate,
@@ -519,7 +523,11 @@ def get_base_ffmpeg_command(
 
     # avoid very high frame rates
     while target_fps > 60:
+<<<<<<< HEAD
         target_fps = target_fps/2
+=======
+        target_fps = target_fps / 2
+>>>>>>> 2ce8dba1631a984f86b343770e80e42611f53790
 
     if target_fps < 1:
         target_fps = 1
@@ -707,7 +715,10 @@ def produce_ffmpeg_commands(media_file, media_info, resolution, codec, output_fi
     #        target_fps = 25
     #    else:
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ce8dba1631a984f86b343770e80e42611f53790
     if media_info.get("video_duration") > CRF_ENCODING_NUM_SECONDS:
         enc_type = "crf"
     else:
